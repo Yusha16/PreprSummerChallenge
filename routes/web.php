@@ -21,6 +21,8 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
-Auth::routes();
+Route::get('/lab', 'LabController@index')->name('lab.index');
 
-Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/lab/create', 'LabController@create')->name('lab.create');
+
+Route::post('/lab', 'LabController@store')->name('lab.store');
