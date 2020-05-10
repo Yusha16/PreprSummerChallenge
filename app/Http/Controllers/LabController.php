@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use Symfony\Component\ErrorHandler\Debug;
 use Illuminate\Validation\ValidationException;
 use Illuminate\Database\Eloquent\Collection;
+use App\Lab;
+use function PHPUnit\Framework\StaticAnalysis\HappyPath\AssertNull\consume;
 
 class LabController extends Controller
 {
@@ -17,8 +19,13 @@ class LabController extends Controller
 
     public function index()
     {
-        $labs = \App\Lab::all();
+        $labs = Lab::all();
         return view('lab.index', ['labs' => $labs]);
+    }
+
+    public function show(Lab $lab)
+    {
+        return view('lab.show', ['lab' => $lab]);
     }
 
     public function create()
@@ -40,10 +47,40 @@ class LabController extends Controller
         //Throw the message if the validation failed
         //throw ValidationException::withMessages(['location' => 'This address does not exist']);
 
-        \App\Lab::create($data);
-        
-        //Return back to the list of labs
-        return view('lab.index');
+        Lab::create($data);
 
+        //Return back to the list of labs
+        //return view('lab.index');
+        //Call the list view
+        return $this->index();
+    }
+
+    public function edit(Lab $lab)
+    {
+        return view('lab.edit', ['lab' => $lab]);
+    }
+
+    public function update(Lab $lab)
+    {
+        //Validate the lab data
+        $data = request()->validate([
+            'name' => ['required', 'string', 'max:255', 'unique:labs,name,' . $lab->id],
+            'location' => ['required', 'string', 'max:255']
+        ]);
+
+        //Same as create we will validate the location when we implement the Google Map API
+
+        //Update the database
+        $lab->update($data);
+
+        //Go back to the Details view of the Lab
+        return redirect("lab/{$lab->id}");
+    }
+
+    public function destroy(Lab $lab)
+    {
+        $lab->delete();
+        //For now I am returning a index view (but in reality it is sending a success if the view is being returned)
+        return $this->index();
     }
 }

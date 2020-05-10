@@ -29,7 +29,7 @@
                             @foreach($labs as $lab)
                                 <div class="row pb-2">
                                     <div class="col-md-3">
-                                        {{ $lab->name }}
+                                        <a href={{ route('lab.show', $lab->id) }}>{{ $lab->name }}</a>
                                     </div>
                                     <div class="col-md-3">
                                         {{ $lab->dateAdded }}

@@ -26,3 +26,11 @@ Route::get('/lab', 'LabController@index')->name('lab.index');
 Route::get('/lab/create', 'LabController@create')->name('lab.create');
 
 Route::post('/lab', 'LabController@store')->name('lab.store');
+
+Route::get('/lab/{lab}', 'LabController@show')->name('lab.show');
+
+Route::get('/lab/{lab}/edit', 'LabController@edit')->name('lab.edit');
+
+Route::patch('/lab/{lab}', 'LabController@update')->name('lab.update');
+
+Route::delete('/lab/{lab}', 'LabController@destroy')->name('lab.destroy');
