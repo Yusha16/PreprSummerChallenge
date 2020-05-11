@@ -23,6 +23,17 @@ Vue.component('example-component', require('./components/ExampleComponent.vue').
 
 Vue.component('delete-button', require('./components/DeleteButton.vue').default);
 
+import Vue from 'vue'
+import * as VueGoogleMaps from "vue2-google-maps";
+Vue.use(VueGoogleMaps, {
+    load: {
+        key: "AIzaSyB4Co301GCKm89-LhBlERD_1cFkU3xHyJA",
+        libraries: "places,directions" // necessary for places input
+    }
+});
+
+Vue.component('lab-map', require('./components/LabMap.vue').default);
+
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application

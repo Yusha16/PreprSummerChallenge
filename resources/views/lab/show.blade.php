@@ -13,7 +13,7 @@
                     <div class="card-body" style="height: 500px;">
                         <!-- Lab data details -->
                         <div class="row justify-content-center pt-2">
-                            <div class="col-md-5 h-500">
+                            <div class="col-md-5">
                                 <div class="row pb-2">
                                     Name: {{ $lab->name }}
                                 </div>
@@ -43,9 +43,7 @@
                                 </div>
                             </div>
                             <!-- Google Map for the Location of the Lab -->
-                            <div class="col-md-5 h-500">
-                            </div>
-
+                            <lab-map location="{{ $lab->location }}"></lab-map>
                         </div>
                     </div>
                 </div>
