@@ -34,3 +34,5 @@ Route::get('/lab/{lab}/edit', 'LabController@edit')->name('lab.edit');
 Route::patch('/lab/{lab}', 'LabController@update')->name('lab.update');
 
 Route::delete('/lab/{lab}', 'LabController@destroy')->name('lab.destroy');
+
+Route::get('/map', 'MapController@index')->name('map.index');
